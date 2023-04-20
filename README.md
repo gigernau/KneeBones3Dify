@@ -13,7 +13,7 @@
 ## 3) Install pip3 for Python3: 
 	sudo apt install python3-pip  && python3 -m pip install --upgrade pip
 
-## 4) Install Python3 modules : 
+## 4) Install Python3 modules: 
 	python3 -m pip install -r requirements.txt
 	
 ## 5) Install [CUDA](https://developer.nvidia.com/cuda-toolkit)
@@ -21,13 +21,11 @@
 ## 6) Install CuPy module ( e.g., for CUDA 11.1 )
 	python3 -m pip install cupy-cuda11x
 
-## 7) Compile smoothPatch code
+## 7) Compile smoothPatch code:
 	gcc -shared -o smoothPatch.so smoothPatch.cpp
 
 
 # USAGE EXAMPLE
-
-## 1) Set VISDOM environment in a separate shell to view images and plots in a browser
 	python3 SegOscanSST.py
 
 
