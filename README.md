@@ -1,5 +1,6 @@
-<img src="https://github.com/gigernau/KneeBones3Dify/blob/main/KneeBones3Dify_logo.png" align="center" height="150" width="150">
 # KneeBones3Dify
+<img src="https://github.com/gigernau/KneeBones3Dify/blob/main/KneeBones3Dify_logo.png" align="center" height="150" width="150">
+
 
 # Setup for Ubuntu Linux OS
 
