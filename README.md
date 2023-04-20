@@ -1,6 +1,6 @@
 # KneeBones3Dify
 
-# SETUP FOR UBUNTU LINUX OS
+# Setup for Ubuntu Linux OS
 
 ## 1) Update : 
 	sudo apt update && sudo apt upgrade
