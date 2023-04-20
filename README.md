@@ -1,5 +1,5 @@
 # KneeBones3Dify
-![alt text](https://github.com/gigernau/KneeBones3Dify/main/KneeBones3Dify_logo.png?raw=true)
+![alt text](https://github.com/gigernau/KneeBones3Dify/blob/main/KneeBones3Dify_logo.png?raw=true?raw=true)
 
 # Setup for Ubuntu Linux OS
 
