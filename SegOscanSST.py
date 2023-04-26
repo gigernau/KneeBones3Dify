@@ -51,6 +51,14 @@ from tkinter import filedialog,PhotoImage,Canvas
 from PIL import Image, ImageTk
 import locale
 
+from subprocess import run
+
+nvccVersion = run("nvcc --version | grep 'release' | awk '{print $6}' | cut -c2- | head -c 2",capture_output=True,shell=True)
+if int(nvccVersion.stdout) <= 11:
+    from cupyx.scipy.ndimage import morphology as morphology
+else:
+    from cupyx.scipy.ndimage import _morphology as morphology
+
 def choose_directory():
     directory_path = filedialog.askdirectory()
     if directory_path:
@@ -74,8 +82,9 @@ def save_info():
     root.destroy()
 
 root = tk.Tk()
-root.title("MEDIA - DICOM SEGMENTATION")
 root.configure(bg="#33383B")
+root.title("KneeBones3Dify - DICOM SEGMENTATION")
+
 
 # Constructing the first frame, frame1
 frame1 = tk.LabelFrame(root, bg="#33383B",
@@ -90,9 +99,14 @@ frame3.grid(row=2, column=0)
 
 media_img = Image.open("KneeBones3Dify_logo.png")
 media_img = media_img.resize((int(media_img.size[0]/4), int(media_img.size[1]/4)), Image.LANCZOS)
+media_imgI = media_img.resize((int(media_img.size[0]/3), int(media_img.size[1]/3)), Image.LANCZOS)
 media_img = ImageTk.PhotoImage(media_img)
-media_imgL = tk.Label(frame1, image=media_img, border=0,highlightthickness=0,borderwidth=0)
+media_imgI = ImageTk.PhotoImage(media_imgI)
+root.wm_iconphoto(True, media_imgI)
+media_imgL = tk.Label(frame1, image=media_img, bg="#33383B",border=0,highlightthickness=0,borderwidth=0)
 media_imgL.grid(row=0,column=0)
+
+
 
 
 
@@ -100,15 +114,15 @@ if sys.platform == "linux" or sys.platform == "linux2":
     # linux
     user = os.environ.get('USER')
     if(locale.getdefaultlocale()[0] == "it_IT"):
-        entry_var = tk.StringVar(frame2,value=f"/home/{user}/Scrivania/MEDIA/Datasets/2/")
+        entry_var = tk.StringVar(frame2,value=f"./Datasets/")
     else:
-        entry_var = tk.StringVar(frame2,value=f"/home/{user}/Desktop/MEDIA/Datasets/2/")
+        entry_var = tk.StringVar(frame2,value=f"./Datasets/")
 elif sys.platform == "win32":
     # Windows...
     import getpass
     # get your username
     user = getpass.getuser()
-    entry_var = tk.StringVar(frame2,value=f"C:\\Users\\{user}\\Desktop\\MEDIA\\Datasets\\2\\")
+    entry_var = tk.StringVar(frame2,value=f".\\Datasets\\")
 
 elif sys.platform == "darwin":
     # OS X
@@ -168,7 +182,7 @@ print("SogliaCrop:", SogliaCrop)
 print("CHadd:", CHadd)
 print("FinalClosing:", FinalClosing)
 print("Protrus:", Protrus)
-print("Bordi:", Bordi)
+print("Edges:", Bordi)
 
 SEbordiScuri = cusk.morphology.cube(2,dtype=cp.bool_) # El. Strutt. per aumentare i bordi scuri intorno alle ossa
 SEseparaOssa = cusk.morphology.ball(7,dtype=cp.bool_)  #El. Strutt. per separare le ossa dalle restanti strutture (es. legamenti e grasso)
@@ -211,7 +225,7 @@ Vcrop = cp.rot90(Vcrop,axes=(2,0))
 # 2.2)Aumenta i bordi scuri intorno alle ossa
 structCube0 = cp.asarray(SEbordiScuri)
 #erode = cuSci._morphology.grey_erosion(Vcrop, footprint=structCube0)
-erode = cuSci.morphology.grey_erosion(Vcrop, footprint=structCube0)
+erode = morphology.grey_erosion(Vcrop, footprint=structCube0)
 Img3D = cp.asarray(cp.double(erode.get()))
 # Normalize in 0 to 1 range
 Img3D = rescale_intensity(Img3D, out_range=(0, 1))
@@ -242,7 +256,7 @@ print(f"Time for segmentation: {timeit.default_timer() - t0}s")
 t0 = timeit.default_timer() 
 
 #OutSeg_1 = cuSci._morphology.binary_erosion(OutSeg, structure=SEseparaOssa)    
-OutSeg_1 = cuSci.morphology.binary_erosion(OutSeg, structure=SEseparaOssa)    
+OutSeg_1 = morphology.binary_erosion(OutSeg, structure=SEseparaOssa)    
 
 print(f"Time for erosion: {timeit.default_timer() - t0}s")
 
@@ -372,7 +386,7 @@ print(f"Time for computing edges in SubVol: {timeit.default_timer() - t0}s")
 BW2s = BW1s*cp.logical_not(edge3Ds) #Segmentazione con separazione fra CC
 BW2s = cp.asarray(BW2s, dtype="float64")
 #BW2es = cuSci._morphology.binary_erosion(BW2s, structure=StrelRotula) #Ulteriore separazione delle CC
-BW2es = cuSci.morphology.binary_erosion(BW2s, structure=StrelRotula)
+BW2es = morphology.binary_erosion(BW2s, structure=StrelRotula)
    
 #VolumeViewer(BW2es.get()*1)
 #exit()
@@ -438,7 +452,7 @@ OutSeg_4 = OutSeg_3
 
 for slice in range(0,OutSeg_3.shape[2]):
   #OutSeg_4[:,:,slice] = cuSci._morphology.grey_erosion(OutSeg_3[:,:,slice], footprint=SS3s)
-  OutSeg_4[:,:,slice] = cuSci.morphology.grey_erosion(OutSeg_3[:,:,slice], footprint=SS3s)
+  OutSeg_4[:,:,slice] = morphology.grey_erosion(OutSeg_3[:,:,slice], footprint=SS3s)
 
 OutSeg_4 = cp.asarray(OutSeg_4,dtype="bool")
 ###########################################################################
@@ -493,9 +507,6 @@ CCb2close = cusk.morphology.binary_closing(CCb2,footprint=SEpp1)
 CCc2close = cusk.morphology.binary_closing(CCc2,footprint=SEpp1)
 print(f"Time for Post-Processing 1 (imclose): {timeit.default_timer() - t0}s")
 
-# for slice in range(0,CCa2close.shape[2]):
-#     CCa2close[:,:,slice] = cuSci._morphology.binary_fill_holes(CCa2close[:,:,slice])
-
 ####################################################################   
 # 4.2) Opening per eliminare protrusioni (la calcificazione), di ampiezza Protrus  
 
@@ -515,12 +526,6 @@ SopenDilb = cusk.morphology.binary_dilation(Sopenb,footprint=SEpp3)
 SopenDilc = cusk.morphology.binary_dilation(Sopenc,footprint=SEpp3)
 BonesClose = SopenDila | SopenDilb | SopenDilc
 print(f"Time for Post-Processing 3 (imdilate): {timeit.default_timer() - t0}s")
-
-# fig, ax = plt.subplots(1,1)
-# tracker = IndexTracker(ax, BonesClose.get())
-# fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
-# plt.show()
-# exit()
 
 
 ##############################################################################
@@ -585,3 +590,4 @@ pl.add_title('BonesCloseFin', font='courier', color='k',
                      font_size=20)
 #pl.link_views()
 pl.show()
+pl.close()
