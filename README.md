@@ -5,7 +5,7 @@
 # Setup for Ubuntu Linux OS
 
 ## 1) Update : 
-	sudo apt update && sudo apt upgrade
+	sudo apt update
   
 ## 2) Install dependencies:
     sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev python-tk python3-tk tk-dev python3-pil python3-pil.imagetk
