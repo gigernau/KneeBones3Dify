@@ -1,4 +1,6 @@
 numpy
+scipy
+scikit-image
 SimpleITK
 pyvista
 cucim
