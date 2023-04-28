@@ -582,12 +582,9 @@ data1.compute_normals(cell_normals=True, point_normals=False, split_vertices=Fal
                       non_manifold_traversal=True,feature_angle=30.0, inplace=False, progress_bar=False)
 
 data1.save(nm)
-#data1.plot_normals(mag=0.1, show_edges=False,faces=True)
 pl = pv.Plotter()
 pl.add_mesh(data1,color="white")
 
-pl.add_title('BonesCloseFin', font='courier', color='k',
-                     font_size=20)
 #pl.link_views()
 pl.show()
 pl.close()
