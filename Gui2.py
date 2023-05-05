@@ -99,6 +99,7 @@ def Gui(dataset, SogliaCrop, CHadd, FinalClosing, Protrus, Edges):
 	Edges_l = tk.Label(frame2, text="Edges:", fg = "#F8F9B5", bg="#33383B")
 	Edges_l.grid(row=3, column=3)
 	slider_var = tk.IntVar()
+	slider_var.set(Edges)
 	Edges_entry =tk.Scale(frame2,fg = "#F8F9B5", bg="#33383B" ,from_=1, to=10, resolution=1,
 	                    border=0,highlightthickness=0,borderwidth=0, 
 	                    variable=slider_var, orient=tk.HORIZONTAL)
