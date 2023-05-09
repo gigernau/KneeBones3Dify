@@ -106,14 +106,13 @@ def Gui(dataset, SogliaCrop, CHadd, FinalClosing, Protrus, Edges):
 	Edges_entry.grid(row=3, column=4)
 
 
-
 	submit_button = tk.Button(frame3, text="Ok", bg = "#1ED2F5", command=save_info)
 	submit_button.grid(row=0, column=2, padx=15, pady=15)
 
 	exit_button = tk.Button(frame3, text="Exit", bg = "#FB9764", command=exit)
 	exit_button.grid(row=0, column=0, padx=15, pady=15)
 
-
+	root.bind("<Return>", (lambda event: save_info()))
 	root.resizable(False, False)
 	root.mainloop()
 
@@ -162,6 +161,7 @@ def GuiFin():
 	exit_button = tk.Button(frame3, text="Exit", bg = "#FB9764", command=exit)
 	exit_button.grid(row=0, column=2, padx=15, pady=15)
 
+	rootR.bind("<Return>", (lambda event: save_info2()))
 	rootR.resizable(False, False)
 	rootR.mainloop()
 
@@ -202,5 +202,6 @@ def GuiError():
 	exit_button = tk.Button(frame3, text="Exit", bg = "#FB9764",command=error)
 	exit_button.grid(row=0, column=2, padx=15, pady=15)
 
+	rootE.bind("<Return>", (lambda event: error()))
 	rootE.resizable(False, False)
 	rootE.mainloop()

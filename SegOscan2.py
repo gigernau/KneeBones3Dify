@@ -83,7 +83,7 @@ CHadd = 6
 FinalClosing = 10
 Protrus = 3
 Edges = 1
-flag = {'a': 1, 'b': 1, 'c':1,'d': 1, 'e': 1, 'f':1}
+
 
 first = True
 fin = True
@@ -188,7 +188,7 @@ def sG():
             print("\n\n###############################")
             print("### Restart from state 1")
             print("###############################\n")
-        elif(CHaddG != CHaddG):
+        elif(CHaddG != CHadd):
             flags = np.asarray([s2,s3,s4,s5,s6,s7,s8])
             print("\n\n###############################")
             print("### Restart from state 2")
