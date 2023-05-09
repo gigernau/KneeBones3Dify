@@ -167,6 +167,9 @@ def sG():
     ##############################################################################
     ###  START MAIN and PARAMETERS
     ###############################################################################
+    print("\n\n###############################")
+    print("### Input Data")
+    print("###############################\n")
     print("Dataset:", datasetG)
     print("SogliaCrop:", SogliaCropG)
     print("CHadd:", CHaddG)
@@ -178,32 +181,32 @@ def sG():
         if(datasetG != dataset):
             flags = np.asarray([s0,s1,s2,s3,s4,s5,s6,s7,s8])
             print("\n\n###############################")
-            print("Restart from state 0")
+            print("### Restart from state 0")
             print("###############################\n")
         elif(SogliaCropG != SogliaCrop):
             flags = np.asarray([s1,s2,s3,s4,s5,s6,s7,s8])
             print("\n\n###############################")
-            print("Restart from state 1")
+            print("### Restart from state 1")
             print("###############################\n")
         elif(CHaddG != CHaddG):
             flags = np.asarray([s2,s3,s4,s5,s6,s7,s8])
             print("\n\n###############################")
-            print("Restart from state 2")
+            print("### Restart from state 2")
             print("###############################\n")
         elif(FinalClosingG != FinalClosing):
             flags = np.asarray([s3,s4,s5,s6,s7,s8])
             print("\n\n###############################")
-            print("Restart from state 3")
+            print("### Restart from state 3")
             print("###############################\n")   
         elif(ProtrusG != Protrus):
             flags = np.asarray([s4,s5,s6,s7,s8])
             print("\n\n###############################")
-            print("Restart from state 4")
+            print("### Restart from state 4")
             print("###############################\n")
         elif(EdgesG != Edges):
             flags = np.asarray([s5,s6,s7,s8])
             print("\n\n###############################")
-            print("Restart from state 5")
+            print("### Restart from state 5")
             print("###############################\n")
                 
     
