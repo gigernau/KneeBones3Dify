@@ -671,8 +671,7 @@ def s8():
     pl = pv.Plotter()
     pl.add_mesh(data1,color="white")
 
-    pl.add_title('BonesCloseFin', font='courier', color='k',
-                         font_size=20)
+    #pl.add_title('BonesCloseFin', font='courier', color='k', font_size=20)
     #pl.link_views()
     pl.show()
     pl.close()
