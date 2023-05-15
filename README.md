@@ -25,7 +25,7 @@
 ## 7) Compile smoothPatch code:
 ### Linux
 	gcc -shared -o smoothPatch.so smoothPatch.cpp
-### Windows
+### Windows ( install https://winlibs.com/ )
 	gcc -c smoothPatch.cpp
 	gcc -shared -o smoothPatch.dll smoothPatch.o
 
