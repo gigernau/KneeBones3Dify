@@ -1,17 +1,14 @@
 #include "math.h"
 #include <cstdio>
 #include <cstring>
+#include <cstdint>
+
 
 using namespace std;
 
-void smoothPatchC(float* vertices, int VertexN,long int* faces, int FacesN);
+void smoothPatchC(float* vertices, int VertexN,int64_t* faces, int FacesN);
 
-void smoothPatchC(float* vertices, int VertexN,long int* faces, int FacesN){
-	//fprintf(stderr,"\nStart smoothPath\n");	
-
-    
-
-
+void smoothPatchC(float* vertices, int VertexN,int64_t* faces, int FacesN){
     /* All inputs */
     double *FacesA, *FacesB, *FacesC;
     double* VerticesX;
@@ -56,45 +53,25 @@ void smoothPatchC(float* vertices, int VertexN,long int* faces, int FacesN){
    FacesB = (double *)malloc( FacesN/4 * sizeof(double) );
    FacesC = (double *)malloc( FacesN/4 * sizeof(double) );
 
-    /*fprintf(stderr,"\nFacesN %d\n",FacesN); 
-    fprintf(stderr,"\nVertexN %d\n",VertexN); */
    /* Read all inputs (faces and vertices) */
-   
 
-
-    //fprintf(stderr,"\nStart for vertex\n"); 
-       for(int i = 0; i < VertexN; i+=3){
-        //fprintf(stderr,"\ni %d\n",i); 
-        //fprintf(stderr,"\nVER1 %f\n",vertices[i]); 
+    for(int i = 0; i < VertexN; i+=3){
+       
         VerticesX[(int)(i/3)] = vertices[i];
-        //fprintf(stderr,"\nVER2 %f\n",vertices[i+1]);
-        
         VerticesY[(int)(i/3)] = vertices[i+1];
-        //fprintf(stderr,"\nVER3 %f\n",vertices[i+2]); 
         VerticesZ[(int)(i/3)] = vertices[i+2];
     }
 
-    /*fprintf(stderr,"\nVER3 %f\n",vertices[3]); 
-    fprintf(stderr,"\nStart for FACES\n"); */
     for(int i = 0; i < FacesN; i+=4){
-        /*fprintf(stderr,"\ni %d\n",i); 
-        fprintf(stderr,"\ni %ld\n",faces[i+1]);*/
+
         FacesA[(int)(i/4)] = faces[i+1];
         FacesB[(int)(i/4)] = faces[i+2];
         FacesC[(int)(i/4)] = faces[i+3];
         
     }
 
-    /*fprintf(stderr,"\n FAC3 %ld\n",faces[3]);
-    fprintf(stderr,"\n FAC3 %f\n",FacesC[0]);*/
-
-        
-
-   //fprintf(stderr,"\nStart iter\n"); 
    Iterations=20;
    Lambda=1;
-
-
 
    /* Intern vertices storage */
    VerticesW = (double *)malloc( VertexN/3 * sizeof(double) );
@@ -113,7 +90,6 @@ void smoothPatchC(float* vertices, int VertexN,long int* faces, int FacesN){
 
    for (j=0; j<Iterations; j++)
    {
-        //fprintf(stderr,"\nIteration: %d\n", j); 
        /* Clean the weights */
        for (i=0; i<VertexN/3; i++) { VerticesW[i] =0;  VerticesN2X[i]=0; VerticesN2Y[i]=0; VerticesN2Z[i]=0; }
 
@@ -223,29 +199,11 @@ void smoothPatchC(float* vertices, int VertexN,long int* faces, int FacesN){
         }
    }
            
-   //printf("Fine C/C++\n");
-  /* Free memory */
-   /* free(VerticesW);
-   printf("w\n");
-   free(VerticesNX);
-   printf("x\n");
-   free(VerticesNY);
-   printf("x\n");
-   free(VerticesNZ);
    
-   printf("xx\n");
-   free(VerticesN2X);
-   printf("xx\n");
-   free(VerticesN2Y);
-   printf("xxxx\n");
-   free(VerticesN2Z);
-
-   printf("Fine2 C/C++\n");*/
-
 }
 
 extern "C" {
-    void smoothPatch(float* vertices, int VertexN, long int* faces, int FacesN)
+    void smoothPatch(float* vertices, int VertexN, int64_t* faces, int FacesN)
     {
         return smoothPatchC(vertices,VertexN,faces,FacesN);
     }

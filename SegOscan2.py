@@ -28,13 +28,22 @@ import timeit
 import tkinter as tk
 from tkinter import filedialog,PhotoImage,Canvas
 from PIL import Image, ImageTk
-from subprocess import run
+from subprocess import run,check_output
 
-nvccVersion = run("nvcc --version | grep 'release' | awk '{print $6}' | cut -c2- | head -c 2",capture_output=True,shell=True)
-if int(nvccVersion.stdout) <= 11:
+
+# Esegui il comando "nvcc --version" e cattura l'output
+output = check_output(["nvcc", "--version"])
+# Decodifica l'output dalla codifica di byte alla stringa
+output_str = output.decode("utf-8")
+# Cerca la stringa "release" nell'output
+release_line = [line for line in output_str.split("\n") if "release" in line][0]
+# Estrai il sesto token (la versione) e i caratteri secondi e terzi della versione
+version = release_line.split(" ")[5][1:3]
+
+if int(version) <= 11:
     from cupyx.scipy.ndimage import morphology as morphology
 else:
-    from cupyx.scipy.ndimage import _morphology as morphology
+    from cupyx.scipy.ndimage import _morphology as morphology 
 
 import ctypes
 import os
@@ -45,7 +54,8 @@ if sys.platform == "linux" or sys.platform == "linux2":
     handle = ctypes.CDLL(dir_path + "/smoothPatch.so")
 elif sys.platform == "win32":
     # Windows...
-    handle = ctypes.CDLL(dir_path + "\\smoothPatch.dll")  
+    handle = ctypes.CDLL(dir_path + "\\smoothPatch.dll")
+
     
 handle.smoothPatch.argtypes = [np.ctypeslib.ndpointer(dtype=np.float32, ndim=1, flags='C_CONTIGUOUS'),ctypes.c_int,
                                 np.ctypeslib.ndpointer(dtype=np.int64, ndim=1, flags='C_CONTIGUOUS'),ctypes.c_int]
@@ -252,8 +262,8 @@ def s0():
     ###  1) Read DICOM
     ###############################################################################
     t0 = timeit.default_timer()
-    global V, StrelRotula, w, h, d, dataset
-    V, StrelRotula, w, h, d = MyReadDICOM(dataset)
+    global V, StrelRotula, w, h, d, dataset,spacing
+    V, StrelRotula, w, h, d,spacing = MyReadDICOM(dataset)
     t1 = timeit.default_timer()
     print("\n\n###############################")
     print("### SEGMENTATION TIMES")
@@ -441,8 +451,8 @@ def s1():
     #BW2es = cuSci._morphology.binary_erosion(BW2s, structure=StrelRotula) #Ulteriore separazione delle CC
     BW2es = morphology.binary_erosion(BW2s, structure=StrelRotula)
        
-    #VolumeViewer(BW2es.get()*1)
-    #exit()
+    # VolumeViewer(BW2es.get()*1)
+    # exit()
 
     ###########################################################################
     # 3.3.4) Selezione della CC più voluminosa (per TUTTE E 4 LE SST, la rotula e' 
@@ -610,17 +620,19 @@ def s6():
     BonesClose2 = cp.zeros([BonesClose.shape[0] +2, BonesClose.shape[1],BonesClose.shape[2]],dtype="bool")
     BonesClose2[1:BonesClose2.shape[0]-1,:,:]=BonesClose
 
+    # VolumeViewer(BonesClose2.get()*1)
+    # exit()
     #########################################
     ###  6) Calcolo Isosuperfice
     #########################################
-    global data1
+    global data1,spacing
     data1 = np.invert(np.asarray(BonesClose2.get()*1))
 
     # del BonesClose,BonesClose2
     # cp._default_memory_pool.free_all_blocks()
 
     data1 = pv.wrap(data1)
-    data1.spacing=(0.313, 0.313, 0.313)
+    data1.spacing=spacing
 
     #triangolazione
     t0 = timeit.default_timer()
@@ -671,8 +683,8 @@ def s8():
     pl = pv.Plotter()
     pl.add_mesh(data1,color="white")
 
-    #pl.add_title('BonesCloseFin', font='courier', color='k', font_size=20)
-    #pl.link_views()
+    # pl.add_title('BonesCloseFin', font='courier', color='k', font_size=20)
+    # pl.link_views()
     pl.show()
     pl.close()
 

@@ -20,6 +20,7 @@ def MyReadDICOM(dataset):
   w = Vorig.GetWidth()
   h = Vorig.GetHeight()
   d = Vorig.GetDepth()
+  spacing = Vorig.GetSpacing()
   Ori= Vorig.GetDirection()
   Vorig = sitk.GetArrayFromImage(Vorig)
 
@@ -54,4 +55,4 @@ def MyReadDICOM(dataset):
           
   V = cp.asarray(V)
 
-  return V, StrelRotula, w, h, d
+  return V, StrelRotula, w, h, d,spacing
