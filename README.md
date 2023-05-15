@@ -23,7 +23,11 @@
 	python3 -m pip install cupy-cuda11x
 
 ## 7) Compile smoothPatch code:
+### Linux
 	gcc -shared -o smoothPatch.so smoothPatch.cpp
+### Windows
+	gcc -c smoothPatch.cpp
+	gcc -shared -o smoothPatch.dll smoothPatch.o
 
 
 # USAGE EXAMPLE
