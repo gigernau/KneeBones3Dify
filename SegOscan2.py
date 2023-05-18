@@ -90,7 +90,7 @@ elif sys.platform == "darwin":
 
 SogliaCrop = 600
 CHadd = 6
-FinalClosing = 10
+FinalClosing = 8
 Protrus = 3
 Edges = 1
 
