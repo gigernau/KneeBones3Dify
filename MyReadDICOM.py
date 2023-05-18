@@ -44,8 +44,8 @@ def MyReadDICOM(dataset):
       VS=cp.fliplr(cp.transpose(Vorig,[0,2,1]))
       V=VS #Voglio sempre la Sagittal    
     
-    #StrelRotula = cusk.morphology.cube(3,dtype=cp.bool_) 
-    StrelRotula = cusk.morphology.cube(2,dtype=cp.bool_) 
+    StrelRotula = cusk.morphology.cube(3,dtype=cp.bool_) 
+    #StrelRotula = cusk.morphology.cube(2,dtype=cp.bool_) 
 
   else: #Sagittal
           print("MRI type: Sagittal")
