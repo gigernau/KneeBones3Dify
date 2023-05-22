@@ -31,7 +31,7 @@
 
 
 # USAGE EXAMPLE
-	python3 SegOscanSST.py
+	python3 SegOscan.py
 
 
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/gianluca.delucia)
