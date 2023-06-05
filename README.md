@@ -2,7 +2,7 @@
 <img src="https://github.com/gigernau/KneeBones3Dify/blob/main/KneeBones3Dify_logo.png" align="center" height="250" width="250">
 
 # Overview
-<img src=docs/images/overview_kneebones3dify.png> 
+<img src=docs/images/overview_kneebones3dify.png>
 
 # Setup for Ubuntu Linux OS
 
