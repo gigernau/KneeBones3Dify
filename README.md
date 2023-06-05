@@ -19,7 +19,7 @@ We perform post-processing steps to refine the segmentation results. These steps
 To create a printable 3D model in the Standard Triangulation Language (STL) format, we implement a scaling procedure to ensure the correct dimensions of the segmented volume. Indeed, the printing software interprets STL files in millimeters, where each unit corresponds to a voxel. We then use the segmented volume to extract the isosurface (mesh) representing a threshold image intensity value. Additionally, we implement a smoothing mesh procedure to improve the printed object's visual quality and mechanical properties. To this end, we apply Laplacian smoothing, using inverse vertex distances as weights to adjust vertex positions and minimize surface distortion. This process reduces irregularities and roughness while preserving the general shape and features of the model, resulting in enhanced overall quality.
 
 ## Input Parameters refinement
-<img src=docs/images/interfaccia.png>
+<img src=docs/images/interface.png>
 After the 3D model creation, users can change any input parameters. Consequently, the software pipeline will restart from the corresponding intermediate state.
 
 # Setup for Ubuntu Linux OS
