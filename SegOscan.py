@@ -223,8 +223,8 @@ def s1():
     # 2.1) Fa il crop eliminando zone scure intorno
     Vcrop,x1,x2,y1,y2,z1,z2 = MRIcropCoordsRev(V,SogliaCrop,w,h,d)
     Vcrop = cp.rot90(Vcrop,axes=(2,0))
+    spacing = np.asarray(spacing)
     spacing[0],spacing[2] = swap(spacing[0],spacing[2])
-
 
 
     
@@ -582,7 +582,7 @@ def s6():
 
     data1 = pv.wrap(data1)
     data1.spacing=spacing
-    print(data1.spacing)
+    #print(data1.spacing)
     
 
     #triangolazione
