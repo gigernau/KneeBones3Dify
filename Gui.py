@@ -74,47 +74,56 @@ def Gui(dataset, SogliaCrop, CHadd, FinalClosing, Protrus, Edges):
 
 	global dataset_entry
 	dataset_entry = tk.Entry(frame2, textvariable=entry_var)
-	dataset_entry.grid(row=1, column=2, padx=5, pady=5)
-	buttonData = tk.Button(frame2, text="DICOM Directory", command=choose_directory,fg = "#F8F9B5", bg="#33383B")
-	buttonData.grid(row=1, column=1, padx=5, pady=5)
+	dataset_entry.grid(row=1, column=2,sticky = "sw", padx=5)
+	buttonData = tk.Button(frame2, text="DICOM Directory", command=choose_directory,fg = "#F8F9B5", bg="#33383B",anchor="e",justify="right")
+	buttonData.grid(row=1, column=1,sticky = "sw", padx=5)
 
 	global sogliaCrop_entry
-	sogliaCrop_l = tk.Label(frame2, text="Crop TH:",fg = "#F8F9B5", bg="#33383B")
-	sogliaCrop_l.grid(row=2, column=1, padx=5, pady=5)
+	sogliaCrop_l = tk.Label(frame2, text="Intensity Threshold:",fg = "#F8F9B5", bg="#33383B",anchor="e",justify="right")
+	sogliaCrop_l.grid(row=2, column=1,sticky = "sw", padx=5)
 	sogliaCrop_entry = tk.Entry(frame2)
 	sogliaCrop_entry.insert(600, str(SogliaCrop))
-	sogliaCrop_entry.grid(row=2, column=2, padx=5, pady=5)
+	sogliaCrop_entry.grid(row=2, column=2,sticky = "sw", padx=5)
 
 	global CHadd_entry
-	CHadd_l = tk.Label(frame2, text="CHadd:",fg = "#F8F9B5", bg="#33383B")
-	CHadd_l.grid(row=3, column=1, padx=5, pady=5)
+	CHadd_l = tk.Label(frame2, text="Convex Hull Dilation:",fg = "#F8F9B5", bg="#33383B",anchor="e",justify="right")
+	CHadd_l.grid(row=3, column=1, sticky = "sw", padx=5)
 	CHadd_entry = tk.Entry(frame2)
 	CHadd_entry.insert(6, str(CHadd))
-	CHadd_entry.grid(row=3, column=2, padx=5, pady=5)
+	CHadd_entry.grid(row=3, column=2,sticky = "sw", padx=5)
+	CHadd_l = tk.Label(frame2, text="",font=("Arial", 4),fg = "#F8F9B5", bg="#33383B")
+	CHadd_l.grid(row=4, column=1)
 
 	global FinalClosing_entry
-	FinalClosing_l = tk.Label(frame2, text="Final Closing:", fg = "#F8F9B5", bg="#33383B")
-	FinalClosing_l.grid(row=1, column=3, padx=5, pady=5)
-	FinalClosing_entry = tk.Entry(frame2)
-	FinalClosing_entry.insert(10, str(FinalClosing))
-	FinalClosing_entry.grid(row=1, column=4, padx=5, pady=5)
+	FinalClosing_l = tk.Label(frame2, text="Final Closing:", fg = "#F8F9B5", bg="#33383B",anchor="e",justify="right")
+	FinalClosing_l.grid(row=1, column=3,sticky = "sw",padx=5)
+	slider_var1 = tk.IntVar()
+	slider_var1.set(FinalClosing)
+	FinalClosing_entry = tk.Scale(frame2,fg = "#F8F9B5", bg="#33383B" ,from_=1, to=20, resolution=1,
+	                    border=0,highlightthickness=0,borderwidth=0, 
+	                    variable=slider_var1, orient=tk.HORIZONTAL)
+	FinalClosing_entry.grid(row=1, column=4,sticky = "w",padx=5)
 
 	global Protrus_entry
-	Protrus_l = tk.Label(frame2, text="Protrus:",fg = "#F8F9B5", bg="#33383B")
-	Protrus_l.grid(row=2, column=3, padx=5, pady=5)
-	Protrus_entry = tk.Entry(frame2)
-	Protrus_entry.insert(3, str(Protrus))
-	Protrus_entry.grid(row=2, column=4, padx=5, pady=5)
+	Protrus_l = tk.Label(frame2, text="Protrusion Removal:",fg = "#F8F9B5", bg="#33383B",anchor="e",justify="right")
+	Protrus_l.grid(row=2, column=3,sticky = "sw",padx=5)
+	slider_var1 = tk.IntVar()
+	slider_var1.set(Protrus)
+	Protrus_entry =tk.Scale(frame2,fg = "#F8F9B5", bg="#33383B" ,from_=1, to=10, resolution=1,
+	                    border=0,highlightthickness=0,borderwidth=0, 
+	                    variable=slider_var1, orient=tk.HORIZONTAL)
+
+	Protrus_entry.grid(row=2, column=4,sticky = "w",padx=5)
 
 	global Edges_entry
-	Edges_l = tk.Label(frame2, text="Edges:", fg = "#F8F9B5", bg="#33383B")
-	Edges_l.grid(row=3, column=3)
+	Edges_l = tk.Label(frame2, text="Final Dilation:",fg = "#F8F9B5", bg="#33383B",anchor="e",justify="right")
+	Edges_l.grid(row=3, column=3,sticky = "sw",padx=5)
 	slider_var = tk.IntVar()
 	slider_var.set(Edges)
 	Edges_entry =tk.Scale(frame2,fg = "#F8F9B5", bg="#33383B" ,from_=1, to=10, resolution=1,
 	                    border=0,highlightthickness=0,borderwidth=0, 
 	                    variable=slider_var, orient=tk.HORIZONTAL)
-	Edges_entry.grid(row=3, column=4)
+	Edges_entry.grid(row=3, column=4,sticky = "w",padx=5)
 
 
 	submit_button = tk.Button(frame3, text="Ok", bg = "#1ED2F5", command=save_info)
