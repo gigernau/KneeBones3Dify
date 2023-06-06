@@ -5,6 +5,11 @@ import cupy as cp
 import cucim.skimage as cusk
 from cucim.skimage.morphology import (cube,ball,square)
 
+
+def swap(a,b):
+    return b,a
+  
+  
 def MyReadDICOM(dataset):
 
   print("\n###############################")
