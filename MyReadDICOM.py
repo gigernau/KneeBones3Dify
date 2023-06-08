@@ -1,7 +1,12 @@
+#MyReadDICOM: reads a DICOM dataset and returns:
+#V           = 3D image volume of the MRI in the sagittal view, with the patella on the top-left side
+#w, h, d     = dimensions of the (transformed) volume V
+#spacing     = slice spacing of the original DICOM
+#StrelRotula = structuring element adopted for patella segmentation
+
 import sys
 import SimpleITK as sitk
 import cupy as cp
-
 import cucim.skimage as cusk
 from cucim.skimage.morphology import (cube,ball,square)
 
@@ -15,7 +20,7 @@ def MyReadDICOM(dataset):
   print("\n###############################")
   print("### DICOM INFO")
   print("###############################")
-  print("\nReading Dicom directory:", dataset)
+  print("\nReading DICOM directory:", dataset)
   reader = sitk.ImageSeriesReader()
 
   dicom_names = reader.GetGDCMSeriesFileNames(dataset)
@@ -29,7 +34,7 @@ def MyReadDICOM(dataset):
   Ori= Vorig.GetDirection()
   Vorig = sitk.GetArrayFromImage(Vorig)
 
-  print("Dicom shape:",Vorig.shape)
+  print("DICOM dimensions:",Vorig.shape)
 
   Ori = tuple([int(round(x,2)) if isinstance(x, float) else x for x in Ori])
 
@@ -39,7 +44,7 @@ def MyReadDICOM(dataset):
       Vorig = cp.rot90(Vorig, k=2,axes=(2,0))
       w,h,d = h,d,w
       VS = cp.flipud(cp.rot90(cp.transpose(Vorig,[0,2,1])))
-      V=VS #Voglio sempre la Sagittal
+      V=VS 
       
 
     else: #%Coronal
@@ -47,17 +52,15 @@ def MyReadDICOM(dataset):
       Vorig = cp.rot90(cp.rot90(Vorig,axes=(2,1)),axes=(0,1))
       w,h,d = d,h,w
       VS=cp.fliplr(cp.transpose(Vorig,[0,2,1]))
-      V=VS #Voglio sempre la Sagittal    
+      V=VS 
     
     StrelRotula = cusk.morphology.cube(3,dtype=cp.bool_) 
-    #StrelRotula = cusk.morphology.cube(2,dtype=cp.bool_) 
 
   else: #Sagittal
           print("MRI type: Sagittal")
           StrelRotula = cusk.morphology.cube(4,dtype=cp.bool_)
-          #StrelRotula = cusk.morphology.cube(3,dtype=cp.bool_)
           V=Vorig
           
   V = cp.asarray(V)
 
-  return V, StrelRotula, w, h, d,spacing
+  return V, StrelRotula, w, h, d, spacing
