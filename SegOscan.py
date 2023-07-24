@@ -202,7 +202,7 @@ def s1():
     ##############################################################################
     ###  2) Pre-processing
     ##############################################################################   
-    global spacing
+    global spacing,Mtfa,SogliaCrop,SEbordiScuri
     ######################################################################
     # 2.1) Crops dark areas around the knee
     Vcrop,x1,x2,y1,y2,z1,z2 = MRIcropCoordsRev(V,SogliaCrop,w,h,d)
@@ -376,6 +376,7 @@ def s1():
 
 
 def s2():
+    global CHadd,Mtfa,Mtfb,Mtfc
     ######################################################################
     # 3.4) Extracts a refined version of the 3 bones (--> CCa2, CCb2, CCc2)
 
@@ -434,6 +435,7 @@ def s2():
 
 
 def s3():
+    global FinalClosing
     ######################################################################
     # 4.1) Closing of the 3 CCs separately to refine border regions
     SEpp1 = cusk.morphology.ball(FinalClosing,dtype=cp.bool_)
@@ -447,6 +449,7 @@ def s3():
 
 
 def s4():
+    global Protrus,CCa2close,CCb2close,CCc2close
     ######################################################################
     # 4.2) Opening of the 3 CCs separately to eliminate protrusions
     SEpp2 = cusk.morphology.ball(Protrus,dtype=cp.bool_) 
@@ -456,13 +459,13 @@ def s4():
     global Sopenb
     Sopenb = cusk.morphology.binary_opening(CCb2close,footprint=SEpp2)
     global Sopenc
-    #Sopenc = cusk.morphology.binary_opening(CCc2close,footprint=SEpp2)
-    Sopenc = CCc2close
+    Sopenc = cusk.morphology.binary_opening(CCc2close,footprint=SEpp2)
+    #Sopenc = CCc2close
     print(f"Time for Post-Processing 2 (imopen): {timeit.default_timer() - t0}s")
 
 
 def s5():
-
+    global Edges,Sopena,Sopenb,Sopenc
     #####################################################################
     # 4.3) Dilation to fill-in edges
     SEpp3 = cusk.morphology.ball(Edges,dtype=cp.bool_)
@@ -476,7 +479,7 @@ def s5():
 
 
 def s6():
-
+    global BonesClose,data1,spacing
     ##############################################################################
     ###  5) Volume Viewer with PyVista
     ##############################################################################
@@ -487,7 +490,7 @@ def s6():
     ##############################################################################
     ###  6) Computes the isosurface
     ##############################################################################
-    global data1,spacing
+    
     data1 = np.invert(np.asarray(BonesClose2.get()*1))
 
     data1 = pv.wrap(data1)
@@ -500,7 +503,7 @@ def s6():
 
 
 def s7():
-
+    global data1 
     ##############################################################################
     ###  7) Smoothpatch
     ##############################################################################
