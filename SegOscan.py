@@ -202,7 +202,7 @@ def s1():
     ##############################################################################
     ###  2) Pre-processing
     ##############################################################################   
-    global spacing,Mtfa,SogliaCrop,SEbordiScuri
+    global spacing,V,SogliaCrop,SEbordiScuri
     ######################################################################
     # 2.1) Crops dark areas around the knee
     Vcrop,x1,x2,y1,y2,z1,z2 = MRIcropCoordsRev(V,SogliaCrop,w,h,d)
