@@ -73,4 +73,6 @@ During the software execution, on the terminal, the user can see all the informa
 At the end of the execution, a new window showing the segmentation results will appear, with the possibility of handling the final STL in a 3D environment.
 <img src=docs/images/output1.png width="600">
 
+## 5) Choose to exit or continue with another segmentation:
+
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/gianluca.delucia)
