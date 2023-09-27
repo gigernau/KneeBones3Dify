@@ -71,8 +71,18 @@ During the software execution, on the terminal, the user can see all the informa
 
 ## 4) Output of the first execution:
 At the end of the execution, a new window showing the segmentation results will appear, with the possibility of handling the final STL in a 3D environment.
+
 <img src=docs/images/output1.png width="600">
 
 ## 5) Choose to exit or continue with another segmentation:
+
+The user now has two possibilities: terminate the execution by clicking on the Exit button or process the same dataset with different parameters by clicking on the Yes button.
+
+<img src=docs/images/exit.png width="300">
+
+## 6) Set the GUI for input parameters changes:
+
+If the user chooses to continue, he will have the possibility to change one or more parameters.
+
 
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/gianluca.delucia)
