@@ -67,7 +67,7 @@ Once all fields are populated, the user must click the OK button to proceed with
 ## 3) Execution log on the terminal:
 During the software execution, on the terminal, the user can see all the information about the Dicom dataset shape, MRI type, segmentation status, and execution times.
 
-<img src=docs/images/execution_log.png width="600">
+<img src=docs/images/execution_log.png width="500">
 
 ## 4) Output of the first execution:
 At the end of the execution, a new window showing the segmentation results will appear, with the possibility of handling the final STL in a 3D environment.
@@ -80,9 +80,20 @@ The user now has two possibilities: terminate the execution by clicking on the E
 
 <img src=docs/images/exit.png width="300">
 
-## 6) Set the GUI for input parameters changes:
+## 6) Input parameters changes:
 
 If the user chooses to continue, he will have the possibility to change one or more parameters.
 
+<img src=docs/images/gui_changes.png width="500">
+
+There is an error handler that checks the validity of the dataset in input. After pressing the button, the startup GUI appears again.
+
+<img src=docs/images/error_handler.png width="300">
+
+## 7) Execution log after parameter modifications:
+
+The software execution restarts from a specific intermediate state where modified input parameters have an actual impact, avoiding the execution of the whole code. New input data will appear on the terminal, followed by the state number from which the execution restarts and the consequent execution log.
+
+<img src=docs/images/execution_log2.png width="500">
 
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/gianluca.delucia)
