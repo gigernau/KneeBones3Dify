@@ -64,6 +64,10 @@ Once you run the above command, a GUI will appear on your screen.
 Through this GUI, the user can set the dataset directory and all the parameters: intensity threshold, convex hull dilation, final closing, protrusion removal, and final dilation.
 Once all fields are populated, the user must click the OK button to proceed with processing.
 
+There is an error handler that checks the validity of the dataset in input. After pressing the button, the startup GUI appears again.
+
+<img src=docs/images/error_handler.png width="300">
+
 ## 3) Execution log on the terminal:
 During the software execution, on the terminal, the user can see all the information about the Dicom dataset shape, MRI type, segmentation status, and execution times.
 
@@ -86,9 +90,9 @@ If the user chooses to continue, he will have the possibility to change one or m
 
 <img src=docs/images/gui_changes.png width="500">
 
-There is an error handler that checks the validity of the dataset in input. After pressing the button, the startup GUI appears again.
+<!--There is an error handler that checks the validity of the dataset in input. After pressing the button, the startup GUI appears again.
 
-<img src=docs/images/error_handler.png width="300">
+<img src=docs/images/error_handler.png width="300">-->
 
 ## 7) Execution log after parameter modifications:
 
