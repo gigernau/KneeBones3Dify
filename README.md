@@ -50,8 +50,27 @@ After the 3D model creation, users can change any input parameters. Consequently
 	gcc -shared -o smoothPatch.dll smoothPatch.o
 
 
-# USAGE EXAMPLE
-	python3 SegOscan.py
+# Usage Example
+## 1) In the terminal, type the following command:
+	
+ 	python3 SegOscan.py
 
+## 2) Startup GUI and input parameters:
+
+Once you run the above command, a GUI will appear on your screen.
+
+<img src=docs/images/startup_gui.png width="500">
+
+Through this GUI, the user can set the dataset directory and all the parameters: intensity threshold, convex hull dilation, final closing, protrusion removal, and final dilation.
+Once all fields are populated, the user must click the OK button to proceed with processing.
+
+## 3) Execution log on the terminal:
+During the software execution, on the terminal, the user can see all the information about the Dicom dataset shape, MRI type, segmentation status, and execution times.
+
+<img src=docs/images/execution_log.png width="600">
+
+## 4) Output of the first execution:
+At the end of the execution, a new window showing the segmentation results will appear, with the possibility of handling the final STL in a 3D environment.
+<img src=docs/images/output1.png width="600">
 
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/gianluca.delucia)
