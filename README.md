@@ -1,6 +1,9 @@
 # KneeBones3Dify
 <img src="KneeBones3Dify_logo.png" align="center" height="250" width="250">
 
+[![DOI](https://zenodo.org/badge/630403113.svg)](https://zenodo.org/doi/10.5281/zenodo.10522875)
+
+
 # Overview
 KneeBones3Dify software offers automatic tools for segmenting and reconstructing knee bones from MR images. It is designed for orthopedic research and clinical practice and aims to facilitate MRI analysis of in vivo biomechanics for knee pathologies. Since manual segmentation of the regions of interest from MR images is time-consuming, labor-intensive, and lacks reproducibility, our software offers accurate segmentation with easy separation of bones and tissues. Additionally, the software provides 3D reconstruction capabilities, enabling the creation of patient-specific models for preoperative analysis in knee replacement surgery.
 
