@@ -54,6 +54,9 @@ After the 3D model creation, users can change any input parameters. Consequently
 
 
 # Usage Example
+
+A dataset example is available at https://github.com/diego-romano/KneeBones3Dify-Annotated-Dataset
+
 ## 1) In the terminal, type the following command:
 	
  	python3 SegOscan.py
