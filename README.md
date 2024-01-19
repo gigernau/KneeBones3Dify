@@ -112,4 +112,4 @@ Finally, the user can see the final result in a new window.
 
 <img src=docs/images/output2.png width="600">
 
-[comment]: <> [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/gianluca.delucia)
+<!--- [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/gianluca.delucia) -->
