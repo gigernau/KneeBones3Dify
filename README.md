@@ -55,7 +55,11 @@ After the 3D model creation, users can change any input parameters. Consequently
 
 # Usage Example
 
-A dataset example is available at https://github.com/diego-romano/KneeBones3Dify-Annotated-Dataset
+A dataset example is available at https://github.com/diego-romano/KneeBones3Dify-Annotated-Dataset 
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10534328.svg)](https://doi.org/10.5281/zenodo.10534328)
+
+
 
 ## 1) In the terminal, type the following command:
 	
