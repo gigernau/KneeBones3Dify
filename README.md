@@ -65,7 +65,7 @@ A dataset example is available at https://github.com/diego-romano/KneeBones3Dify
 
 Once you run the above command, a GUI will appear on your screen.
 
-<img src=docs/images/startup_gui.png width="500">
+<img src=docs/images/GUI.png width="500">
 
 Through this GUI, the user can set the dataset directory and all the parameters: intensity threshold, convex hull dilation, final closing, protrusion removal, and final dilation.
 Once all fields are populated, the user must click the OK button to proceed with processing.
